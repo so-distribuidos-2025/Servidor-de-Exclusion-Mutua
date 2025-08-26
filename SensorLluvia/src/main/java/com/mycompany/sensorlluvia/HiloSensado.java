@@ -1,21 +1,21 @@
 package com.mycompany.sensorlluvia;
+import java.io.PrintWriter;
 import java.lang.Math;
+import java.net.Socket;
 
 public class HiloSensado extends Thread{
     public boolean on;
     public int lluvia;
     public float probabilidad;
-
-    public HiloSensado(boolean on, int lluvia, float probabilidad) {
-        this.on = on;
-        this.lluvia = lluvia;
-        this.probabilidad = probabilidad;
-    }
+    Socket cnxServidor;
+    PrintWriter pw;
     
-    public HiloSensado(){
+    public HiloSensado(Socket s, PrintWriter pw){
         this.on = true;
         this.lluvia = 0;
         this.probabilidad = 0;
+        cnxServidor = s;
+        this.pw = pw;
     }
     
     public int generarLluvia(){
@@ -40,6 +40,7 @@ public class HiloSensado extends Thread{
         /*En este while indica cuando llueve*/
         while(on){
             this.probabilidad = probabilidadLluvia();
+            
             if (probabilidad > 50){
                 this.lluvia= 1;
             }else{
