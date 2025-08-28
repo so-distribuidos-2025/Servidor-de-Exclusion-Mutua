@@ -10,15 +10,21 @@ import java.util.logging.Logger;
 public class SensorLluvia {
 
     public static void main(String[] args) {
-        InetAddress IPServidor;
+        InetAddress ipServidor;
         PrintWriter pw;
         try {
-            IPServidor = InetAddress.getByName("localhost");
-            Socket cliente = new Socket(IPServidor,20000);
-            pw = new PrintWriter(cliente.getOutputStream());
-            pw.println("sensorLluvia");
+            ipServidor = InetAddress.getByName("localhost");
+            Socket cliente = new Socket(ipServidor, 20000);
+            System.out.println(cliente);
             
-            HiloSensado sensor = new HiloSensado(cliente,pw);
+            // PrintWriter con autoflush activado
+            pw = new PrintWriter(cliente.getOutputStream(), true);
+            
+            // Identifica el sensor al servidor
+            pw.println("lluvia");
+            
+            // Arranca el hilo de sensado
+            HiloSensado sensor = new HiloSensado(cliente, pw);
             sensor.start();
         } catch (IOException ex) {
             Logger.getLogger(SensorLluvia.class.getName()).log(Level.SEVERE, null, ex);
