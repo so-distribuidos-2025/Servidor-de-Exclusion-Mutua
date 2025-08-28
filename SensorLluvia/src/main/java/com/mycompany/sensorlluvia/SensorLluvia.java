@@ -16,13 +16,10 @@ public class SensorLluvia {
             ipServidor = InetAddress.getByName("localhost");
             Socket cliente = new Socket(ipServidor, 20000);
             System.out.println(cliente);
-            
             // PrintWriter con autoflush activado
             pw = new PrintWriter(cliente.getOutputStream(), true);
-            
             // Identifica el sensor al servidor
             pw.println("lluvia");
-            
             // Arranca el hilo de sensado
             HiloSensado sensor = new HiloSensado(cliente, pw);
             sensor.start();

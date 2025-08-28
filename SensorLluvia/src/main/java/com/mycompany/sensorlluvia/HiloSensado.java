@@ -5,7 +5,7 @@ import java.net.Socket;
 
 public class HiloSensado extends Thread {
     private boolean on;
-    private int lluvia; // 1 si llueve, 0 si no
+    private double lluvia; // 1 si llueve, 0 si no
     private float probabilidad;
     private Socket cnxServidor;
     PrintWriter pw;
@@ -18,7 +18,7 @@ public class HiloSensado extends Thread {
         this.pw = pw;
     }
 
-    public int getLluvia() {
+    public double getLluvia() {
         return lluvia;
     }
 
@@ -43,7 +43,7 @@ public class HiloSensado extends Thread {
     public void run() {
         while (on) {
             generarLluvia();
-            pw.println("L=" + this.lluvia);
+            pw.println(this.lluvia);
             System.out.println("L=" + this.lluvia);
 
             try {
