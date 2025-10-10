@@ -8,10 +8,7 @@ import com.sistdist.interfaces.IDetectorFalla;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-/**
- *
- * @author lesca
- */
+
 public class DetectorFallo extends UnicastRemoteObject implements IDetectorFalla{
 
     boolean llegoMensaje;
